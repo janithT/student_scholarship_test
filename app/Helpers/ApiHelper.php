@@ -28,12 +28,6 @@ function apiResponseWithStatusCode($data, $status, $message, $user, $statusCode)
 }
 
 // generate key for system use
-function generateTaskKey($perfix): string
-{
-    return $perfix . Str::random(10);
-}
-
-// generate key for system use
 function generateTime(): string
 {
     return now()->format('YmdHisv');
@@ -67,10 +61,8 @@ function sendSystemEmail(array $data = [])
     return false;
 }
 
-/**
- * 
- * Store files
- */
+// Store files 
+
 function storeFiles(object $model, array $files, string $tempFolder = 'temp/application_docs', string $disk = 'public'): array
 {
     $storedFiles = [];

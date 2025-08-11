@@ -26,7 +26,7 @@ class ApplicationService
         try {
             $user_id = Auth::user()->id;
             $scholarships = $this->applicationRepository->getMyApps($user_id);
-            return apiServiceResponse($scholarships, true, 'Applications retrived successfully');
+            return apiServiceResponse($scholarships, true, 'Applications retrieved successfully');
              
         } catch (\Exception $e) {
             return apiServiceResponse([], false, $e->getMessage());
@@ -42,7 +42,7 @@ class ApplicationService
     {
         try {
             $user_id = Auth::user()->id; // or this
-            $scholarships = $this->applicationRepository->getById($application->user_id);
+            $scholarships = $this->applicationRepository->getById($application->id);
             return apiServiceResponse($scholarships, true, 'Applications retrived successfully');
              
         } catch (\Exception $e) {
@@ -81,16 +81,8 @@ class ApplicationService
      * @param array $data
      * @return bool
      */
-    public function updateApplication(array $data, int $id): object
+    public function updateApplication(array $data, int $id)
     {
-        try {
-            $updated = $this->applicationRepository->update($data, $id);
-            return apiServiceResponse($updated, true, 'Scholars updated successfully');
-             
-        } catch (\Exception $e) {
-            return apiServiceResponse([], false, $e->getMessage());
-        
-        }
 
     }
 
@@ -102,14 +94,6 @@ class ApplicationService
      */
     public function deleteApplications(string $id)
     {
-        try {
-            $updated = $this->applicationRepository->delete($id);
-            return apiServiceResponse($updated, true, 'Scholars deleted successfully');
-             
-        } catch (\Exception $e) {
-            return apiServiceResponse([], false, $e->getMessage());
-        
-        }
 
     }
 

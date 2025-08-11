@@ -19,9 +19,12 @@ class ApplicationRepository
     }
 
 
-    public function getById(int $userId)
+    /**
+     * Get a single application by user ID.
+     */
+    public function getById(int $id)
     {
-        return Application::where('user_id', $userId)
+        return Application::find($id)
             ->with('scholarship:id,title,description')
             ->first(['id', 'user_id', 'scholarship_id', 'status', 'remarks']);
     }
@@ -57,9 +60,6 @@ class ApplicationRepository
      */
     public function update(array $data, int $id)
     {
-        $scholarship = Application::findOrFail($id);
-        $scholarship->update($data);
-        return $scholarship;
     }
 
 
@@ -68,7 +68,5 @@ class ApplicationRepository
      */
     public function delete(int $id)
     {
-        $scholarship = Application::findOrFail($id);
-        return $scholarship->delete();
     }
 }

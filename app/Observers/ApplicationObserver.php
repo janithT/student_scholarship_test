@@ -20,7 +20,6 @@ class ApplicationObserver
         }
         $this->logChange($application, 'created', [
             'message' => "Application for scholarship '{$scholar->title}' created successfully",
-            'application' => $application->toArray(),
         ]);
     }
 

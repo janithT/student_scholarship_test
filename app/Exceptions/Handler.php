@@ -24,22 +24,14 @@ class Handler extends ExceptionHandler
     {
         $this->renderable(function (ModelNotFoundException $e, $request) {
             if ($request->expectsJson()) {
-                return response()->json([
-                    'message' => 'The requested resource was not found.',
-                    'error' => 'Not Found',
-                    'code' => 404
-                ], 404);
+                return apiResponseWithStatusCode([], 'error', 'The requested resource was not found.', '', 404);
             }
         });
 
         // Optional: handle route not found as well
         $this->renderable(function (NotFoundHttpException $e, $request) {
             if ($request->expectsJson()) {
-                return response()->json([
-                    'message' => 'The endpoint you requested was not found.',
-                    'error' => 'Not Found',
-                    'code' => 404
-                ], 404);
+                return apiResponseWithStatusCode([], 'error', 'The endpoint you requested was not found.', '', 404);
             }
         });
     }
